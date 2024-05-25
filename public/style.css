@@ -1,6 +1,34 @@
+body {
+    background-color: black; /* Set the background color of the page to black */
+    margin: 0; /* Remove default margins */
+    padding: 0; /* Remove default padding */
+    overflow: hidden; /* Prevent scrollbars from appearing */
+}
+
 .alert-container {
+    position: relative;
     white-space: nowrap;
     overflow: hidden;
-    border: 1px solid #ccc;
-    padding: 10px;
+    font-family: Arial, sans-serif;
+    font-size: 25px;
+    font-weight: bold;
+    color: white;
+    display: flex;
+    align-items: center;
+    height: 50px; /* Adjust height if needed */
+}
+
+@keyframes crawl {
+    0% {
+        transform: translateX(100%);
+    }
+    100% {
+        transform: translateX(-100%);
+    }
+}
+
+.alert-text {
+    display: inline-block;
+    animation: crawl 10s linear infinite; /* Adjust duration as needed */
+    white-space: nowrap;
 }

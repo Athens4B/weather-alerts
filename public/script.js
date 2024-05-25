@@ -5,7 +5,18 @@ async function fetchData() {
     try {
         const response = await fetch(url);
         const data = await response.json();
-        return data.features.map(alert => ({ event: alert.properties.event, description: alert.properties.areaDesc }));
+        console.log('API Data:', data); // Log the API response for debugging
+
+        // Ensure data.features exists and is an array
+        if (Array.isArray(data.features)) {
+            return data.features.map(alert => ({ 
+                event: alert.properties.event, 
+                description: alert.properties.areaDesc // Use the correct field name
+            }));
+        } else {
+            console.error('Unexpected API response structure:', data);
+            return [];
+        }
     } catch (error) {
         console.error("Error fetching data:", error);
         return [];
@@ -16,16 +27,13 @@ async function fetchData() {
 async function displayAlerts() {
     const alertsContainer = document.getElementById('alerts-container');
     const alerts = await fetchData();
+    console.log('Alerts:', alerts); // Log the fetched alerts for debugging
 
-    let index = 0;
-    setInterval(() => {
-        if (alerts.length > 0) {
-            alertsContainer.textContent = `${alerts[index].event}: ${alerts[index].description}`;
-            index = (index + 1) % alerts.length;
-        } else {
-            alertsContainer.textContent = "No alerts available";
-        }
-    }, 5000); // Change this value to adjust the speed of crawling
+    if (alerts.length > 0) {
+        alertsContainer.innerHTML = `<div class="alert-text">${alerts.map(alert => `${alert.event}: ${alert.description}`).join(' | ')}</div>`;
+    } else {
+        alertsContainer.textContent = "No alerts available";
+    }
 }
 
 // Start displaying alerts
