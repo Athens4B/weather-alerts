@@ -20,19 +20,17 @@ body {
 
 @keyframes crawl {
     0% {
-        margin-left: 100%; /* Move the text outside the container */
-        margin-right: -100%; /* Offset the margin to create space for the text */
+        transform: translateX(100%);
     }
     100% {
-        margin-left: -100%; /* Move the text back inside the container */
-        margin-right: 100%; /* Offset the margin to create space for the text */
+        transform: translateX(-100%);
     }
 }
 
 .alert-text {
     display: inline-block;
+    animation: crawl 25s linear infinite; /* Adjust duration as needed */
     white-space: nowrap;
-    animation: crawl 20s linear infinite; /* Adjust duration as needed */
 }
 
 .alert-container {
