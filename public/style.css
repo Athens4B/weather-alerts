@@ -37,5 +37,5 @@ body {
 
 .alert-container {
     overflow: hidden;
-    width: 100%; /* Ensure the container expands to fit the text */
+    width: auto; /* Ensure the container expands to fit the text */
 }
