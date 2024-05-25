@@ -5,7 +5,7 @@ async function fetchData() {
     try {
         const response = await fetch(url);
         const data = await response.json();
-        return data.features.map(alert => ({ event: alert.properties.event, description: alert.properties.areasDesc }));
+        return data.features.map(alert => ({ event: alert.properties.event, description: alert.properties.areaDesc }));
     } catch (error) {
         console.error("Error fetching data:", error);
         return [];
