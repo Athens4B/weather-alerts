@@ -1,3 +1,16 @@
+// Function to fetch data from the API and update the crawl
+async function updateCrawl() {
+    const alertsContainer = document.getElementById('alerts-container');
+    const alerts = await fetchData();
+    console.log('Alerts:', alerts); // Log the fetched alerts for debugging
+
+    if (alerts.length > 0) {
+        alertsContainer.innerHTML = `<div class="alert-text">${alerts.map(alert => `${alert.event}: ${alert.description}`).join(' | ')}</div>`;
+    } else {
+        alertsContainer.textContent = "No alerts available";
+    }
+}
+
 // Function to fetch data from the API
 async function fetchData() {
     const url = "https://api.weather.gov/alerts?active=true&status=actual&message_type=alert&code=TOR,SVR&region_type=land&urgency=Immediate,Expected,Future,Past&severity=Extreme,Severe,Moderate&certainty=Observed,Likely,Possible&limit=500";
@@ -5,8 +18,6 @@ async function fetchData() {
     try {
         const response = await fetch(url);
         const data = await response.json();
-        console.log('API Data:', data); // Log the API response for debugging
-
         // Ensure data.features exists and is an array
         if (Array.isArray(data.features)) {
             return data.features.map(alert => ({ 
@@ -23,18 +34,13 @@ async function fetchData() {
     }
 }
 
-// Function to display alerts in a crawling manner
-async function displayAlerts() {
-    const alertsContainer = document.getElementById('alerts-container');
-    const alerts = await fetchData();
-    console.log('Alerts:', alerts); // Log the fetched alerts for debugging
-
-    if (alerts.length > 0) {
-        alertsContainer.innerHTML = `<div class="alert-text">${alerts.map(alert => `${alert.event}: ${alert.description}`).join(' | ')}</div>`;
-    } else {
-        alertsContainer.textContent = "No alerts available";
-    }
+// Function to update the crawl initially and then every 60 seconds
+function startUpdating() {
+    // Update the crawl initially
+    updateCrawl();
+    // Update the crawl every 60 seconds
+    setInterval(updateCrawl, 60000); // 60000 milliseconds = 60 seconds
 }
 
-// Start displaying alerts
-displayAlerts();
+// Start updating the crawl
+startUpdating();
