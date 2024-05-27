@@ -29,7 +29,7 @@ body {
 
 .alert-text {
     display: inline-block;
-    animation: crawl 20s linear infinite; /* Adjust duration as needed */
+    animation: crawl 25s linear infinite; /* Adjust duration as needed */
     white-space: nowrap;
 }
 
