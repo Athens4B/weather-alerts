@@ -31,11 +31,9 @@ body {
     display: inline-block;
     animation: crawl 20s linear infinite; /* Adjust duration as needed */
     white-space: nowrap;
-    animation-timing-function: steps(1, end); /* Ensures the animation steps are only at the keyframes */
 }
 
 .alert-container {
     overflow: hidden;
     width: 100%; /* Ensure the container expands to fit the text */
 }
-
