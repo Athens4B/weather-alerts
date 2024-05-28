@@ -14,7 +14,7 @@ async function updateCrawl() {
 // Function to fetch data from the API
 async function fetchAlerts() {
     try {
-        const response = await fetch('https://api.weather.gov/alerts?active=true&status=actual&message_type=alert&code=TOR,SVR&region_type=land&urgency=Immediate,Expected,Future,Past&severity=Extreme,Severe,Moderate&certainty=Observed,Likely,Possible&limit=500');
+        const response = await fetch('https://api.weather.gov/alerts/active?status=actual&message_type=alert,update&code=TOR,SVR&region_type=land&urgency=Immediate,Expected,Future,Past&severity=Extreme,Severe,Moderate,Minor&certainty=Observed,Likely,Possible&limit=500');
         const data = await response.json();
         return data.features.map(alert => `${alert.properties.event}: ${alert.properties.areaDesc}`).join(' | ');
     } catch (error) {
