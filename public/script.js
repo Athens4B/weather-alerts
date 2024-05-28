@@ -12,35 +12,30 @@ async function updateCrawl() {
 }
 
 // Function to fetch data from the API
-async function fetchData() {
-    const url = "https://api.weather.gov/alerts?active=true&status=actual&message_type=alert&code=TOR,SVR&region_type=land&urgency=Immediate,Expected,Future,Past&severity=Extreme,Severe,Moderate&certainty=Observed,Likely,Possible&limit=500";
-
+async function fetchAlerts() {
     try {
-        const response = await fetch(url);
+        const response = await fetch('https://api.weather.gov/alerts?active=true&status=actual&message_type=alert&code=TOR,SVR&region_type=land&urgency=Immediate,Expected,Future,Past&severity=Extreme,Severe,Moderate&certainty=Observed,Likely,Possible&limit=500');
         const data = await response.json();
-        // Ensure data.features exists and is an array
-        if (Array.isArray(data.features)) {
-            return data.features.map(alert => ({ 
-                event: alert.properties.event, 
-                description: alert.properties.areaDesc // Use the correct field name
-            }));
-        } else {
-            console.error('Unexpected API response structure:', data);
-            return [];
-        }
+        return data.features.map(alert => `${alert.properties.event}: ${alert.properties.areaDesc}`).join(' | ');
     } catch (error) {
-        console.error("Error fetching data:", error);
-        return [];
+        console.error('Error fetching alerts:', error);
+        return 'Unable to fetch alerts at this time.';
     }
 }
 
-// Function to update the crawl initially and then every 60 seconds
-function startUpdating() {
-    // Update the crawl initially
-    updateCrawl();
-    // Update the crawl every 120 seconds
-    setInterval(updateCrawl, 120000); // 60000 milliseconds = 60 seconds
+async function updateCrawl() {
+    const crawlTextElement = document.getElementById('crawl-text');
+    const alerts = await fetchAlerts();
+    crawlTextElement.innerHTML = alerts;
+    
+    // Calculate animation duration based on content length
+    const textLength = crawlTextElement.offsetWidth;
+    const duration = textLength / 100; // Adjust the divisor to control speed
+    crawlTextElement.style.animationDuration = `${duration}s`;
 }
 
-// Start updating the crawl
-startUpdating();
+// Initial load
+updateCrawl();
+
+// Update every 120 seconds
+setInterval(updateCrawl, 120000);

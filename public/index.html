@@ -3,11 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Weather Alerts</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Weather Alerts Crawl</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            background-color: black;
+            color: white;
+            font-family: Arial, sans-serif;
+            font-weight: bold;
+            font-size: 25px;
+        }
+        .crawl-container {
+            white-space: nowrap;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 100%;
+        }
+        .crawl-text {
+            display: inline-block;
+            white-space: nowrap;
+            animation: crawl 60s linear infinite;
+        }
+        @keyframes crawl {
+            0% {
+                transform: translateX(100%);
+            }
+            100% {
+                transform: translateX(-100%);
+            }
+        }
+    </style>
 </head>
 <body>
-    <div class="alert-container" id="alerts-container"></div>
+    <div class="crawl-container">
+        <div id="crawl-text" class="crawl-text"></div>
+    </div>
     <script src="script.js"></script>
 </body>
 </html>
