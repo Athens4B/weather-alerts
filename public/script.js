@@ -38,8 +38,8 @@ async function fetchData() {
 function startUpdating() {
     // Update the crawl initially
     updateCrawl();
-    // Update the crawl immediately and then every 60 seconds
-    setInterval(updateCrawl, 0); // Repeats immediately and then every 60 seconds
+    // Update the crawl every 60 seconds
+    setInterval(updateCrawl, 60000); // 60000 milliseconds = 60 seconds
 }
 
 // Start updating the crawl
