@@ -20,18 +20,19 @@ body {
 
 @keyframes crawl {
     0% {
-        transform: translateX(100%);
+        margin-left: 100%; /* Move the text outside the container */
+        margin-right: -100%; /* Offset the margin to create space for the text */
     }
     100% {
-        transform: translateX(-100%);
+        margin-left: -100%; /* Move the text back inside the container */
+        margin-right: 100%; /* Offset the margin to create space for the text */
     }
 }
 
 .alert-text {
     display: inline-block;
-    animation: crawl 40s linear infinite; /* Adjust duration as needed */
     white-space: nowrap;
-    animation-timing-function: steps(1, end); /* Ensures the animation steps are only at the keyframes */
+    animation: crawl 35s linear infinite; /* Adjust duration as needed */
 }
 
 .alert-container {
