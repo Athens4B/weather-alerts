@@ -31,7 +31,7 @@ async function updateCrawl() {
     // Calculate animation duration based on content length
     const textLength = crawlTextElement.offsetWidth;
     const containerWidth = document.querySelector('.crawl-container').offsetWidth;
-    const duration = (textLength + containerWidth) / 200; // Adjust the divisor to control speed
+    const duration = (textLength + containerWidth) / 150; // Adjust the divisor to control speed
     crawlTextElement.style.animationDuration = `${duration}s`;
 }
 
