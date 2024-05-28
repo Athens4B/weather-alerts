@@ -38,5 +38,6 @@ async function updateCrawl() {
 // Initial load
 updateCrawl();
 
-// Update every 120 seconds
-setInterval(updateCrawl, 120000);
+// Update every 60 seconds
+setInterval(updateCrawl, 60000);
+
