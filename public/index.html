@@ -19,21 +19,14 @@
             position: absolute;
             top: 50%;
             transform: translateY(-50%);
-            width: 100%;
+            width: 70%; /* Adjust this width to make margins smaller */
+            left: 15%;  /* Center the container horizontally */
             overflow: hidden;
         }
         .crawl-text {
             display: inline-block;
             white-space: nowrap;
-            animation: crawl 20s linear infinite;
-        }
-        @keyframes crawl {
-            0% {
-                transform: translateX(100%);
-            }
-            100% {
-                transform: translateX(-100%);
-            }
+            will-change: transform;
         }
     </style>
 </head>

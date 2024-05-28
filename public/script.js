@@ -27,12 +27,32 @@ async function updateCrawl() {
     const crawlTextElement = document.getElementById('crawl-text');
     const alerts = await fetchAlerts();
     crawlTextElement.innerHTML = alerts;
-    
+
     // Calculate animation duration based on content length
     const textLength = crawlTextElement.offsetWidth;
     const containerWidth = document.querySelector('.crawl-container').offsetWidth;
-    const duration = (textLength + containerWidth) / 150; // Adjust the divisor to control speed
-    crawlTextElement.style.animationDuration = `${duration}s`;
+    const duration = (textLength + containerWidth) / 100; // Adjust the divisor to control speed
+    crawlTextElement.style.animation = `crawl ${duration}s linear infinite`;
+
+    // Keyframes with dynamic duration
+    const styleSheet = document.styleSheets[0];
+    // Remove any existing keyframes
+    for (let i = styleSheet.cssRules.length - 1; i >= 0; i--) {
+        if (styleSheet.cssRules[i].name === 'crawl') {
+            styleSheet.deleteRule(i);
+        }
+    }
+    // Add new keyframes
+    styleSheet.insertRule(`
+        @keyframes crawl {
+            0% {
+                transform: translateX(${containerWidth}px);
+            }
+            100% {
+                transform: translateX(-${textLength}px);
+            }
+        }
+    `, styleSheet.cssRules.length);
 }
 
 // Initial load
@@ -40,4 +60,3 @@ updateCrawl();
 
 // Update every 60 seconds
 setInterval(updateCrawl, 60000);
-
