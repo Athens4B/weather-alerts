@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Alerts Crawl</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            background-color: black;
+            color: white;
+            font-family: Arial, sans-serif;
+            font-weight: bold;
+            font-size: 25px;
+        }
+        .crawl-container {
+            white-space: nowrap;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 70%; /* Adjust this width to make margins smaller */
+            left: 15%;  /* Center the container horizontally */
+            overflow: hidden;
+        }
+        .crawl-text {
+            display: inline-block;
+            white-space: nowrap;
+            will-change: transform;
+        }
+    </style>
+</head>
+<body>
+    <div class="crawl-container">
+        <div id="crawl-text" class="crawl-text"></div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
