@@ -1,41 +1,76 @@
 body {
-    background-color: black; /* Set the background color of the page to black */
-    margin: 0; /* Remove default margins */
-    padding: 0; /* Remove default padding */
-    overflow: hidden; /* Prevent scrollbars from appearing */
+    font-family: Arial, sans-serif;
+    background-color: black;
+    color: black; /* Change text color to black */
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
 }
 
-.alert-container {
+.crawl-container {
     position: relative;
-    white-space: nowrap;
+    width: 100%;
+    height: 100px; /* Adjust height as needed */
     overflow: hidden;
-    font-family: Arial, sans-serif;
-    font-size: 25px;
-    font-weight: bold;
-    color: white;
-    display: flex;
-    align-items: center;
-    height: 50px; /* Adjust height if needed */
+    background-color: black;
+}
+
+.crawl-text {
+    position: absolute;
+    top: 0;
+    left: 0;
+    white-space: nowrap;
+    animation: crawl 20s linear infinite; /* Adjust animation duration */
+    color: white; /* Adjust text color */
 }
 
 @keyframes crawl {
     0% {
-        margin-left: 100%; /* Move the text outside the container */
-        margin-right: -100%; /* Offset the margin to create space for the text */
+        transform: translateX(100%);
     }
     100% {
-        margin-left: -100%; /* Move the text back inside the container */
-        margin-right: 100%; /* Offset the margin to create space for the text */
+        transform: translateX(-100%);
     }
 }
 
-.alert-text {
-    display: inline-block;
-    white-space: nowrap;
-    animation: crawl 35s linear infinite; /* Adjust duration as needed */
+.warning-counter {
+    position: absolute;
+    bottom: 10px;
+    left: 50%; /* Center horizontally */
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
 }
 
-.alert-container {
-    overflow: hidden;
-    width: auto; /* Ensure the container expands to fit the text */
+.warning-count {
+    font-size: 25px;
+    margin: 0; /* Remove margin */
+    color: black; /* Change text color to black */
+}
+
+.severe {
+    background-color: yellow; /* Background color for Severe Thunderstorm Warning */
+}
+
+.tornado {
+    background-color: red; /* Background color for Tornado Warning */
+}
+
+.flash-severe {
+    animation: flash 0.5s linear;
+    background-color: darkgoldenrod; /* Flash color for Severe Thunderstorm Warning */
+}
+
+.flash-tornado {
+    animation: flash 0.5s linear;
+    background-color: darkred; /* Flash color for Tornado Warning */
+}
+
+@keyframes flash {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.5;
+    }
 }
